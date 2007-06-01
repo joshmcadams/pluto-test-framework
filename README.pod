@@ -1,0 +1,64 @@
+=head1 NAME 
+
+PLUTO - PL/SQL Unit Testing for Oracle
+
+=head1 DESCRIPTION
+
+PLUTO is a light-weight PL/SQL-based unit testing framework for Oracle.  The
+framework is loosely based on the popluar JUnit framework for Java development.
+PLUTO takes advantage of Oracle's Object-Oriented development features and
+offers a base object from which custom unit test objects can be derived.
+
+The core of PLUTO is consists of just two objects: one nested table that is
+used by the PLUTO_OBJ to pass around testing procedure names and then the 
+PLUTO_OBJ itself.
+
+PLUTO provides one primary 'public' procedure: run_tests.  This procedure looks
+at your object's inheritance chain and pulls out all of the procedures that
+are named like 'STARTUP%', 'SHUTDOWN%', 'SETUP%', 'TEARDOWN%', 'TEST%'.  It
+then runs these as you'd probably expect:
+
+=over
+
+=item * all startup procedures are executed only once at the start of the run
+
+=item * all shutdown procedures are executed only once at the end of the run
+
+=item * all setup procedures are executed once before each test procedure runs
+
+=item * all teardown procedures are executed once after each test procedure runs
+
+=item * all test procedures are executed once
+
+=back
+
+For an example on how to write your tests, check out the C<examples/> directory.
+
+=head1 INSTALLATION
+
+Installation is easy, just navigate to the base directory of this uncompressed
+archive and run:
+
+  sqlplus @install.sql
+
+=head1 LICENSE
+
+All source in this distribution has been released under the GPL Version 2 
+and the Artistic License.
+
+=head1 DISCLAIMER
+
+This code is distributed as-is with no warranty.
+
+=head1 SUPPORT
+
+This software does not come with any official support; however, bug reports,
+suggestions, and patches are welcome.
+
+=head1 AUTHOR
+
+Josh McAdams 
+Contact via gmail.com address: joshua.mcadams+pluto
+
+=cut
+
