@@ -13,6 +13,10 @@ whenever oserror exit failure;
 
 @sql/core/pluto_obj_body.sql;
 
+@sql/utilities/pluto_output_obj.sql;
+
+@sql/utilities/pluto_output_tap_obj.sql;
+
 @sql/utilities/pluto_tap_util.sql;
 
 @sql/utilities/pluto_tap_util_body.sql;

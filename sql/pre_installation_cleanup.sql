@@ -3,10 +3,15 @@ set feedback on;
 set serveroutput on;
 
 declare
-  type varchar_varray is varray( 2 ) of varchar2( 30 );
+  type varchar_varray is varray( 4 ) of varchar2( 30 );
 
   va_types  varchar_varray
-                      := varchar_varray( 'PLUTO_OBJ', 'PLUTO_PROC_NAME_TAB' );
+                      := varchar_varray( 
+                        'PLUTO_OUTPUT_TAP_OBJ',
+                        'PLUTO_OUTPUT_OBJ',
+			'PLUTO_OBJ', 
+                        'PLUTO_PROC_NAME_TAB' 
+		      );
   found_it  number         := 0;
 begin
   for i in 1 .. va_types.limit
