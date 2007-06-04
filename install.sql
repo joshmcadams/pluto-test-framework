@@ -1,8 +1,11 @@
 set serveroutput on;
 set feedback on;
 set echo on;
-on sqlerror exit failure;
-on oserror exit failure;
+
+whenever sqlerror exit failure;
+whenever oserror exit failure;
+
+@sql/pre_installation_cleanup.sql;
 
 @sql/core/pluto_proc_name_tab.sql;
 
