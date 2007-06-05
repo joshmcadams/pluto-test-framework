@@ -7,10 +7,10 @@ declare
 
   va_types  varchar_varray
                       := varchar_varray( 
+			'PLUTO_OBJ', 
+                        'PLUTO_UTIL_OBJ',
                         'PLUTO_OUTPUT_TAP_OBJ',
                         'PLUTO_OUTPUT_OBJ',
-                        'PLUTO_UTIL_OBJ',
-			'PLUTO_OBJ', 
                         'PLUTO_PROC_NAME_TAB' 
 		      );
   found_it  number         := 0;
@@ -23,7 +23,7 @@ begin
      where object_name = va_types( i );
 
     if found_it > 0 then
-      dbms_output.put_line( 'drop type ' || va_types( i ) );
+      dbms_output.put_line( 'drop type ' || va_types( i ) || ' force' );
       execute immediate 'drop type ' || va_types( i );
     end if;
   end loop;

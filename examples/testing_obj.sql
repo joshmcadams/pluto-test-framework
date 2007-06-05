@@ -73,3 +73,5 @@ end;
 /
 
 drop type testing_obj;
+
+exit;
