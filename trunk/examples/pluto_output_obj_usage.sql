@@ -17,3 +17,6 @@ begin
   po.log_test_results( test_label => 'test ten', test_passed => true );
   po.log_test_completion;
 end;
+/
+
+exit;

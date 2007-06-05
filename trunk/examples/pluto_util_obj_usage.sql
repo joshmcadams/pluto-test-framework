@@ -17,3 +17,5 @@ begin
   util2.finish;
 end;
 /
+
+exit;
