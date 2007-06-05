@@ -1,20 +1,28 @@
-set echo on;
-set feedback on;
 set serveroutput on;
+set feedback on;
+set echo on;
 
 whenever sqlerror exit failure;
 whenever oserror exit failure;
 
 create or replace type pluto_output_tap_obj under pluto_output_obj(
+--
   constructor function pluto_output_tap_obj
     return self as result,
+--
   overriding member procedure log_test_count( test_count number ),
+--
   overriding member procedure log_test_results(
-    test_name    in  varchar,
+    test_label   in  varchar,
     test_passed  in  boolean,
     details      in  varchar := ''
   ),
+--
+  overriding member procedure log_message( message in varchar := '' ),
+--
   overriding member procedure log_test_completion
+
+--
 )
 instantiable not final;
 /
@@ -33,10 +41,39 @@ create or replace type body pluto_output_tap_obj is
   overriding member procedure log_test_count( test_count number ) is
   begin
     m_expected_test_count      := test_count;
-    dbms_output.put_line('1..' || m_expected_test_count );
+
+    if m_expected_test_count > 0 then
+      dbms_output.put_line('1..' || m_expected_test_count );
+    else
+      dbms_output.put_line( '0..0' );
+    end if;
   end log_test_count;
+--
+  overriding member procedure log_message( message in varchar := '' ) is
+    newline_location  number;
+    starting_message  varchar2( 4000 );
+    current_line      varchar2( 4000 );
+    empty_string      varchar2( 1 )    := '';
+  begin
+    starting_message           := message;
+
+    loop
+      newline_location           := instr( starting_message, chr( 10 ));
+      exit when(newline_location is null or newline_location = 0 );
+      current_line               :=
+                          substr( starting_message, 1, newline_location - 1 );
+      dbms_output.put_line('# ' || current_line );
+      starting_message           :=
+                             substr( starting_message, newline_location + 1 );
+    end loop;
+
+    if starting_message is not null then
+      dbms_output.put_line('# ' || starting_message );
+    end if;
+  end log_message;
+--
   overriding member procedure log_test_results(
-    test_name    in  varchar,
+    test_label   in  varchar,
     test_passed  in  boolean,
     details      in  varchar := ''
   ) is
@@ -45,18 +82,25 @@ create or replace type body pluto_output_tap_obj is
 
     if test_passed = true then
       m_passed_test_count        := m_passed_test_count + 1;
-      dbms_output.put_line('ok - ' || test_name );
+      dbms_output.put( 'ok' );
     else
       m_failed_test_count        := m_failed_test_count + 1;
-      dbms_output.put_line('not ok - ' || test_name );
+      dbms_output.put( 'not ok' );
     end if;
+
+    if test_label is not null then
+      dbms_output.put(' - ' || test_label );
+    end if;
+
+    dbms_output.put_line( '' );
   end log_test_results;
+--
   overriding member procedure log_test_completion is
   begin
     if m_expected_test_count is null then
       dbms_output.put_line('1..' || m_running_test_count );
     end if;
   end log_test_completion;
+--
 end;
 /
-
