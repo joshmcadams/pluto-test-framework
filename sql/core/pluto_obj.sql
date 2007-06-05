@@ -1,10 +1,3 @@
-set serveroutput on;
-set feedback on;
-set echo on;
-
-whenever sqlerror exit failure;
-whenever oserror exit failure;
-
 create or replace type pluto_obj as object(
 --
 /****************************************************************************
@@ -15,6 +8,7 @@ create or replace type pluto_obj as object(
   m_setup_procedures     pluto_proc_name_tab,
   m_teardown_procedures  pluto_proc_name_tab,
   m_testing_procedures   pluto_proc_name_tab,
+  m_util_object          pluto_util_obj,
   m_calling_schema       varchar2( 30 ),
   m_calling_object       varchar2( 30 ),
   m_testing_block        varchar2( 32000 ),

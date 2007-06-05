@@ -1,15 +1,9 @@
-set serveroutput on;
-set feedback on;
-set echo on;
-
-whenever sqlerror exit failure;
-whenever oserror exit failure;
-
 create or replace type body pluto_obj is
 --
   constructor function pluto_obj
     return self as result is
   begin
+    m_util_object              := pluto_util_obj( );
     return;
   end pluto_obj;
 --
@@ -17,7 +11,6 @@ create or replace type body pluto_obj is
   begin
     self.determine_calling_obj;
     self.collect_all_procedures;
-  
     build_testing_block( );
 
     execute immediate m_testing_block;
