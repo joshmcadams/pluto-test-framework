@@ -77,6 +77,7 @@ create or replace type body pluto_output_tap_obj is
     test_passed  in  boolean,
     details      in  varchar := ''
   ) is
+    l_test_label  varchar2( 4000 );
   begin
     m_running_test_count       := m_running_test_count + 1;
 
@@ -88,8 +89,10 @@ create or replace type body pluto_output_tap_obj is
       dbms_output.put( 'not ok' );
     end if;
 
+    l_test_label               := replace( test_label, chr( 10 ), ' ' );
+
     if test_label is not null then
-      dbms_output.put(' - ' || test_label );
+      dbms_output.put(' - ' || l_test_label );
     end if;
 
     dbms_output.put_line( '' );
@@ -104,3 +107,5 @@ create or replace type body pluto_output_tap_obj is
 --
 end;
 /
+
+show errors;

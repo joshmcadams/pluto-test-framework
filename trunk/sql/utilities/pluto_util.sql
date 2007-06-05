@@ -17,9 +17,9 @@ create or replace package pluto_util as
 --
   procedure log( message varchar );
 --
-  procedure ok( ok_or_not boolean, test_label varchar );
+  procedure ok( test_passed boolean, test_label varchar );
 --
-  function ok( ok_or_not boolean, test_label varchar )
+  function ok( test_passed boolean, test_label varchar )
     return boolean;
 --
 end pluto_util;
