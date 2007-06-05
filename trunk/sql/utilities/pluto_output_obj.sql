@@ -1,6 +1,6 @@
-set echo on;
-set feedback on;
 set serveroutput on;
+set feedback on;
+set echo on;
 
 whenever sqlerror exit failure;
 whenever oserror exit failure;
@@ -17,13 +17,20 @@ create or replace type pluto_output_obj as object(
 --
   constructor function pluto_output_obj
     return self as result,
+--
   member procedure log_test_count( test_count in number ),
+--
   member procedure log_test_results(
-    test_name    in  varchar,
+    test_label   in  varchar,
     test_passed  in  boolean,
     details      in  varchar := ''
   ),
+--
+  member procedure log_message( message in varchar := '' ),
+--
   member procedure log_test_completion
+
+--
 )
 instantiable not final;
 /
@@ -44,8 +51,9 @@ create or replace type body pluto_output_obj is
     m_expected_test_count      := test_count;
     dbms_output.put_line('Test Count [' || m_expected_test_count || ']' );
   end log_test_count;
+--
   member procedure log_test_results(
-    test_name    in  varchar,
+    test_label   in  varchar,
     test_passed  in  boolean,
     details      in  varchar
   ) is
@@ -54,15 +62,21 @@ create or replace type body pluto_output_obj is
 
     if test_passed = true then
       m_passed_test_count        := m_passed_test_count + 1;
-      dbms_output.put_line(m_running_test_count || ' - ' || test_name
+      dbms_output.put_line(m_running_test_count || ' - ' || test_label
         || ' passed' );
     else
       m_failed_test_count        := m_failed_test_count + 1;
-      dbms_output.put_line(m_running_test_count || ' - ' || test_name
+      dbms_output.put_line(m_running_test_count || ' - ' || test_label
         || ' failed' );
       dbms_output.put_line( details );
     end if;
   end log_test_results;
+--
+  member procedure log_message( message in varchar := '' ) is
+  begin
+    dbms_output.put_line( message );
+  end log_message;
+--
   member procedure log_test_completion is
   begin
     dbms_output.put_line(m_passed_test_count || ' tests passed' );
