@@ -5,7 +5,7 @@ set echo on;
 whenever sqlerror exit failure;
 whenever oserror exit failure;
 
-@sql/pre_installation_cleanup.sql;
+--@sql/pre_installation_cleanup.sql;
 
 @sql/core/pluto_proc_name_tab.sql;
 
@@ -15,11 +15,15 @@ whenever oserror exit failure;
 
 @sql/utilities/pluto_output_obj.sql;
 
+@sql/utilities/pluto_output_obj_body.sql;
+
 @sql/utilities/pluto_output_tap_obj.sql;
 
-@sql/utilities/pluto_util.sql;
+@sql/utilities/pluto_output_tap_obj_body.sql;
 
-@sql/utilities/pluto_util_body.sql;
+@sql/utilities/pluto_util_obj.sql;
+
+@sql/utilities/pluto_util_obj_body.sql;
 
 exit;
 
