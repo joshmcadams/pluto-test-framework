@@ -17,6 +17,7 @@ create or replace type body pluto_obj is
   begin
     self.determine_calling_obj;
     self.collect_all_procedures;
+  
     build_testing_block( );
 
     execute immediate m_testing_block;

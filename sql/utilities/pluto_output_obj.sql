@@ -90,10 +90,19 @@ create or replace type body pluto_output_obj is
         m_running_test_count        ||
         ' tests'
       );
+
+      if m_running_test_count < 1 then
+        m_running_test_count       := 1;
+      end if;
+
       dbms_output.put_line(
         (m_passed_test_count / m_running_test_count ) * 100 ||
         ' percent of actual tests successful'
       );
+    end if;
+
+    if m_expected_test_count < 1 then
+      m_expected_test_count      := 1;
     end if;
 
     dbms_output.put_line(
@@ -104,3 +113,4 @@ create or replace type body pluto_output_obj is
 --
 end;
 /
+
