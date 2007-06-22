@@ -48,7 +48,7 @@ and the Artistic License.
 
 =head1 DISCLAIMER
 
-This code is distributed as-is with no warranty.
+This code is distributed as-is with no warranty, actual or implied.
 
 =head1 SUPPORT
 
