@@ -41,3 +41,4 @@ create or replace type pluto_obj as object(
 )
 instantiable not final;
 /
+
