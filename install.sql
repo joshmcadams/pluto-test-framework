@@ -9,10 +9,6 @@ whenever oserror exit failure;
 
 @sql/core/pluto_proc_name_tab.sql;
 
-@sql/core/pluto_obj.sql;
-
-@sql/core/pluto_obj_body.sql;
-
 @sql/utilities/pluto_output_obj.sql;
 
 @sql/utilities/pluto_output_obj_body.sql;
@@ -24,6 +20,10 @@ whenever oserror exit failure;
 @sql/utilities/pluto_util_obj.sql;
 
 @sql/utilities/pluto_util_obj_body.sql;
+
+@sql/core/pluto_obj.sql;
+
+@sql/core/pluto_obj_body.sql;
 
 exit;
 
