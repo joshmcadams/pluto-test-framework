@@ -1,4 +1,4 @@
-create or replace type body pluto_output_tap_obj is
+create or replace type body pluto_output_tap_obj as
 --
   constructor function pluto_output_tap_obj
     return self as result is
@@ -78,3 +78,4 @@ create or replace type body pluto_output_tap_obj is
 --
 end;
 /
+
