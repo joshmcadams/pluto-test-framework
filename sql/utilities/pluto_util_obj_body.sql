@@ -26,7 +26,7 @@ create or replace type body pluto_util_obj is
 --
   member procedure log( message in varchar ) is
   begin
-    null;
+    m_output_obj.log_message( message );
   end log;
 --
   member procedure ok( test_passed in boolean, test_label in varchar ) is
