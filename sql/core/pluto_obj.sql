@@ -9,9 +9,9 @@ create or replace type pluto_obj as object(
   m_teardown_procedures  pluto_proc_name_tab,
   m_testing_procedures   pluto_proc_name_tab,
   m_util_object          pluto_util_obj,
-  m_calling_schema       varchar2( 30 ),
-  m_calling_object       varchar2( 30 ),
-  m_testing_block        varchar2( 32000 ),
+  m_calling_schema       varchar2(30),
+  m_calling_object       varchar2(30),
+  m_testing_block        varchar2(32000),
 --
 /****************************************************************************
   Public Methods
@@ -30,15 +30,13 @@ create or replace type pluto_obj as object(
 --
   member procedure collect_all_procedures,
 --
-  member function get_procedures( wildcard varchar )
+  member function get_procedures(wildcard varchar)
     return pluto_proc_name_tab,
 --
-  member procedure add_procedures_to_block( procedures pluto_proc_name_tab ),
+  member procedure add_procedures_to_block(procedures pluto_proc_name_tab),
 --
   member procedure build_testing_block
-
 --
 )
 instantiable not final;
 /
-
