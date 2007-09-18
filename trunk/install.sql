@@ -21,9 +21,9 @@ whenever oserror exit failure;
 
 @sql/utilities/pluto_util_obj_body.sql;
 
-@sql/core/pluto_obj.sql;
+@sql/core/pluto_obj.pks;
 
-@sql/core/pluto_obj_body.sql;
+@sql/core/pluto_obj.pkb;
 
 exit;
 
