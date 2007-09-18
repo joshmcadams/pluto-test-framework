@@ -9,17 +9,17 @@ whenever oserror exit failure;
 
 @sql/core/pluto_proc_name_tab.sql;
 
-@sql/utilities/pluto_output_obj.sql;
+@sql/utilities/pluto_output_obj.pks;
 
-@sql/utilities/pluto_output_obj_body.sql;
+@sql/utilities/pluto_output_obj.pkb;
 
-@sql/utilities/pluto_output_tap_obj.sql;
+@sql/utilities/pluto_output_tap_obj.pks;
 
-@sql/utilities/pluto_output_tap_obj_body.sql;
+@sql/utilities/pluto_output_tap_obj.pkb;
 
-@sql/utilities/pluto_util_obj.sql;
+@sql/utilities/pluto_util_obj.pks;
 
-@sql/utilities/pluto_util_obj_body.sql;
+@sql/utilities/pluto_util_obj.pkb;
 
 @sql/core/pluto_obj.pks;
 
