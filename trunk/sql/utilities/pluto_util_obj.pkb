@@ -1,4 +1,4 @@
-create or replace type body pluto_util_obj is
+CREATE OR REPLACE TYPE BODY pluto_util_obj is
 -------------------------------------------------------------------------------
   constructor function pluto_util_obj(
     output_object  in  pluto_output_obj := null
@@ -254,6 +254,32 @@ create or replace type body pluto_util_obj is
     v_result    := is_ok(data_got, data_expected, test_label);
   end is_ok;
 -------------------------------------------------------------------------------
+  member function is_ok(
+    self           in out  pluto_util_obj,
+    data_got       in      timestamp,
+    data_expected  in      timestamp,
+    test_label     in      varchar
+  )
+    return boolean is
+  begin
+    return is_ok_helper(
+            data_got = data_expected,
+            to_char(data_got),
+            to_char(data_expected),
+            test_label
+          );
+  end is_ok;
+--
+  member procedure is_ok(
+    data_got       in  timestamp,
+    data_expected  in  timestamp,
+    test_label     in  varchar
+  ) is
+    v_result  boolean;
+  begin
+    v_result    := is_ok(data_got, data_expected, test_label);
+  end is_ok;
+-------------------------------------------------------------------------------
   member function is_ok_helper(
     self           in out  pluto_util_obj,
     test_passed    in      boolean,
@@ -304,5 +330,3 @@ create or replace type body pluto_util_obj is
 -------------------------------------------------------------------------------
 end;
 /
-
-show errors;
