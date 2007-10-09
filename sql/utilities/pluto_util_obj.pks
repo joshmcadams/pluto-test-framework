@@ -1,4 +1,4 @@
-create or replace type pluto_util_obj as object(
+CREATE OR REPLACE type pluto_util_obj as object(
   m_output_obj  pluto_output_obj,
 --
   constructor function pluto_util_obj(
@@ -88,6 +88,20 @@ create or replace type pluto_util_obj as object(
   member procedure is_ok(
     data_got       in  date,
     data_expected  in  date,
+    test_label     in  varchar
+  ),
+--
+  member function is_ok(
+    self           in out  pluto_util_obj,
+    data_got       in      timestamp,
+    data_expected  in      timestamp,
+    test_label     in      varchar
+  )
+    return boolean,
+--
+  member procedure is_ok(
+    data_got       in  timestamp,
+    data_expected  in  timestamp,
     test_label     in  varchar
   ),
 --
