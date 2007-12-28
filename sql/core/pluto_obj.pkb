@@ -16,6 +16,15 @@ create or replace type body pluto_obj is
     execute immediate m_testing_block;
   end run_tests;
 --
+  member function source_revision
+    return number is
+      v_revision   VARCHAR (50) := '$Revision$';
+  begin
+    return to_number( regexp_replace ( 
+      v_revision, '[^0-9]*([[:digit:]]+).*', '\1'
+    ) );
+  end source_revision;
+--
   member procedure determine_calling_obj is
     holder     anydata;
     dot_index  number;
