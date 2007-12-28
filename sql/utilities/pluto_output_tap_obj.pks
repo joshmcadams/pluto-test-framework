@@ -1,4 +1,4 @@
-create or replace type pluto_output_tap_obj under pluto_output_obj(
+create or replace type pluto_output_tap_obj authid current_user under pluto_output_obj(
   constructor function pluto_output_tap_obj
     return self as result,
 --

@@ -1,4 +1,4 @@
-create or replace type pluto_output_obj as object(
+create or replace type pluto_output_obj authid current_user as object(
   m_expected_test_count  number,
   m_passed_test_count    number,
   m_failed_test_count    number,
