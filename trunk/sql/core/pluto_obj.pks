@@ -22,6 +22,9 @@ create or replace type pluto_obj authid current_user as object(
 --
   member procedure run_tests,
 --
+  member function source_revision
+    return number,
+--
 /****************************************************************************
   Private Methods
 ****************************************************************************/
