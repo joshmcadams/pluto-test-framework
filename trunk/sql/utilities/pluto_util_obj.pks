@@ -1,4 +1,4 @@
-CREATE OR REPLACE type pluto_util_obj as object(
+CREATE OR REPLACE type pluto_util_obj authid current_user as object(
   m_output_obj  pluto_output_obj,
 --
   constructor function pluto_util_obj(

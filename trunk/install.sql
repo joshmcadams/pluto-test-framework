@@ -25,5 +25,18 @@ whenever oserror exit failure;
 
 @sql/core/pluto_obj.pkb;
 
+begin
+  execute immediate 'GRANT UNDER ON pluto_obj TO PUBLIC';
+
+  execute immediate 'GRANT EXECUTE ON pluto_obj TO PUBLIC';
+
+  execute immediate 'GRANT EXECUTE ON pluto_output_obj TO PUBLIC';
+
+  execute immediate 'GRANT EXECUTE ON pluto_output_tap_obj TO PUBLIC';
+
+  execute immediate 'GRANT EXECUTE ON pluto_util_obj TO PUBLIC';
+end;
+/
+
 exit;
 

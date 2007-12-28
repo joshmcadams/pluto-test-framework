@@ -1,4 +1,4 @@
-create or replace type pluto_obj as object(
+create or replace type pluto_obj authid current_user as object(
 --
 /****************************************************************************
   Private Attributes
