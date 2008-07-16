@@ -42,3 +42,29 @@ To get started using PLUTO, you just have to subclass the main PLUTO object, plu
 }}}
 
 Of course, this specification doesn't really accomplish much other than to create a child class of _pluto_obj_.  We won't realize how powerful that is until a little later in this tutorial.
+
+Adding some meat to the object, let's include a specification for a constructor.
+
+{{{
+  create or replace type testing_obj under pluto_obj(
+    constructor function testing_obj
+      return self as result
+  )
+  instantiable not final;
+}}}
+
+The implementation of the constructor simply creates a utility object and an output object.  The utility object is stashed away in _m_util_object_.  _m_util_object_ is an attribute of _pluto_obj_ that is intended to store the utility object.  Typically, this part of the test class construction will be very similar to what you see below, with the exception being the type of output object constructed and passed to the utility object constructor.
+
+The type of output object chosen at this point of your testing is very important.  It determines what type of data will be emitted from the testing suite at runtime, be it the default human-readable data, TAP, inserts into a logging table, or some combination of all of the above.  In the case below, we settle on using the default human-readable form of output object.
+
+{{{
+  create or replace type body testing_obj is
+    constructor function testing_obj
+      return self as result is
+    begin
+      m_util_object              :=
+                     pluto_util_obj( output_object => pluto_output_obj( ));
+      return;
+    end testing_obj;
+  end;
+}}}
