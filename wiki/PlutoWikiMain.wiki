@@ -68,3 +68,53 @@ The type of output object chosen at this point of your testing is very important
     end testing_obj;
   end;
 }}}
+
+Excellent, we now have the minimum amount of code necessary to run unit tests through PLUTO, but we have a problem... have you spotted it?
+
+We don't have any tests!
+
+Let's add a test to our new testing object.
+
+{{{
+  create or replace type testing_obj under pluto_obj(
+    member procedure test_one,
+    constructor function testing_obj
+      return self as result
+  )
+  instantiable not final;
+}}}
+
+{{{
+  create or replace type body testing_obj is
+    member procedure test_one is
+    begin
+      m_util_object.ok(
+        test_passed    => true,
+        test_label     => 'running test_one'      ||
+                          chr( 10 )               ||
+                          'i hope that it worked'
+      );
+    end test_one;
+    constructor function testing_obj
+      return self as result is
+    begin
+      m_util_object              :=
+                     pluto_util_obj( output_object => pluto_output_obj( ));
+      return;
+    end testing_obj;
+  end;
+}}}
+
+Okay, so it's not the most exciting test, but it works.  You can see in the first part of the listing that we add a procedure specification called _test_one_.  Later, we define that procedure in the type body.  In the definition we invoke the _ok_ method from the utility object, passing it a boolean value for the status of the test and a test label.
+
+In order to run the test, we simply run an anonymous PL/SQL block.
+
+{{{
+  declare
+    ut_obj  my_test_obj := my_test_obj( );
+  begin
+    ut_obj.run_tests;
+  end;
+}}}
+
+This executes the _test_one_ test and prints the results to the standard Oracle output stream.  Of course, there is a lot more to PLUTO than simply running test methods one after another.  PLUTO implements xUnit-style testing, which we'll go over shortly.  Also, there is a host of functions and procedures available in the PLUTO utility module.
