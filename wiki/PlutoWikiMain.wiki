@@ -7,7 +7,7 @@ Unit testing your PL/SQL from inside Oracle doesn't have to be difficult or expe
 
 = Installing PLUTO =
 
-Installation couldn't be much easier, just [href="http://code.google.com/p/pluto-test-framework/downloads/list download the latest version] of the PLUTO source to a machine that can connect to your database, unpack the source file, and run:
+Installation couldn't be much easier, just [http://code.google.com/p/pluto-test-framework/downloads/list download the latest version] of the PLUTO source to a machine that can connect to your database, unpack the source file, and run:
 
 {{{
   $> sqlplus @install.sql
@@ -28,6 +28,7 @@ PLUTO is intended to be a lightweight system for unit testing.  It doesn't creat
 || pluto_obj || The core package for the testing framework.  This object is the object that custom test classes extend in order to get the benefit of the PLUTO interpretation of xUnit ||
 
 
+
 = Getting Started Unit Testing With PLUTO =
 
-coming soon
+After installing PLUTO, you are ready to start writing unit tests.  You might be interested in some [http://pluto-test-framework.googlecode.com/svn/trunk/examples/ test examples].  The text below highlights what you'll see in some of that example code.
