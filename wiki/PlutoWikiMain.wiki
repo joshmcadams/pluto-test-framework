@@ -128,3 +128,24 @@ PLUTO introspects a given testing object and looks for procedures that are calle
 Sometimes you need to do a little work before you get started testing though.  Often there is a fixture that needs to execute that performs an expensive operation such as creating data structures or seeding data for the tests that are about to be performed.  There is a good chance that you only really want to do most of these operations once per test run.  To accomplish this, PLUTO looks for procedures that begin with the word _STARTUP_.  Procedures prefixed with _STARTUP_ execute before any _TEST_ procedures execute.  If there are multiple _STARTUP_ procedures, they are executed in ascending order according to the language settings of the current Oracle session.
 
 Of course, if you are creating objects, seeding data, or doing whatever wild and crazy test preparation at startup, you'll want to clean things up after you are finished testing.  In many cases, you could probably wrap your tests in a transaction an simply rollback after the tests are complete.  However, you can also take advantage of _SHUTDOWN_ methods in PLUTO.  These methods begin with the word _SHUTDOWN_ and are executed after all _TEST_ procedures are complete.  You probably guessed it by now...  if there are multiple _SHUTDOWN_ procedures, they are executed in ascending order according to the language settings of the current Oracle session.
+
+Great!  We can now run our tests and wrap all of the tests in some startup and shutdown logic that makes sure that we are testing in a sane/standard/regular/regulated environment.  But what if we need to do some sort of setup before each tests runs?  Maybe we need to clean up some data that the test before might have changed or possibly reset some counter or buffer.  _SETUP_ procedures are there for you.
+
+Any procedure that starts with the word _SETUP_ is executed before each _TEST_ procedure that is executed.  This execution happens after any _STARTUP_ procedures run.  If there are multiple _SETUP_ procedures, they are executed in ascending order according to the language settings of the current Oracle session.
+
+Of course, _SETUP_ wouldn't be complete without _TEARDOWN_.  _TEARDOWN_ procedures start with the word _TEARDOWN_ and are executed after each _TEST_ procedure.  If there are multiple _TEARDOWN_ procedures, they are executed in ascending order according to the language settings of the current Oracle session.
+
+Any procedure that doesn't start with the word _STARTUP_, _SETUP_, _TEST_, _TEARDOWN_, or _SHUTDOWN_ is ignored by PLUTO.
+
+If you are having issues remembering the order or figuring out how often each procedure runs just remember that each _STARTUP_ procedure runs once and runs before anything else.    Similarly, each _SHUTDOWN_ procedure runs once and runs after everything else.  Each _TEST_ method runs once and all of the test methods are sandwiched in between the _STARTUP_ and _SHUTDOWN_ procedure(s).  The _SETUP_ and _TEARDOWN_ methods are the ones that get the most action typically.  Each procedure is ran one time for each _TEST_ procedure.  _SETUP_ runs before each test and _TEARDOWN_ afterward.
+
+To illustrate, here is an example of the order of execution of a set of imaginary procedures in a PLUTO object:
+
+  * STARTUP_SYSTEM
+  * SETUP_FOR_TESTING
+  * TEST_ONE
+  * TEARDOWN_AFTER_TESTING
+  * SETUP_FOR_TESTING
+  * TEST_TWO
+  * TEARDOWN_AFTER_TESTING
+  * SHUTDOWN_SYSTEM
