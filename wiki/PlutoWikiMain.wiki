@@ -3,4 +3,14 @@
 
 = Introduction =
 
-Welcome to the wiki for Pluto, a system for PL/SQL Unit Testing for Oracle.  Pluto attempts to be a light-weight framework for creating unit tests for your PL/SQL code.
+Unit testing your PL/SQL from inside Oracle doesn't have to be difficult or expensive.  There is no need to be tied into some third-party closed source tool and no reason to start from scratch writing your own framework.  PLUTO can help get you started on the road to unit testing bliss, or at least unit testing.
+
+= Installing PLUTO =
+
+Installation couldn't be much easier, just [href="http://code.google.com/p/pluto-test-framework/downloads/list download the latest version] of the PLUTO source to a machine that can connect to your database, unpack the source file, and run:
+
+{{{
+  $> sqlplus @install.sql
+}}}
+
+If you have any issues with the install, please be sure to [http://code.google.com/p/pluto-test-framework/issues/list log them].  Be sure to mention the version of Oracle that you are running.  And better yet, if you figured out how to fix the issue, please send in the patch.
