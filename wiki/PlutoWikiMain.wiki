@@ -32,3 +32,13 @@ PLUTO is intended to be a lightweight system for unit testing.  It doesn't creat
 = Getting Started Unit Testing With PLUTO =
 
 After installing PLUTO, you are ready to start writing unit tests.  You might be interested in some [http://pluto-test-framework.googlecode.com/svn/trunk/examples/ test examples].  The text below highlights what you'll see in some of that example code.
+
+To get started using PLUTO, you just have to subclass the main PLUTO object, pluto_obj.  To do this in Oracle, you'll need to create a package specification.
+
+{{{
+  create or replace type testing_obj under pluto_obj(
+  )
+  instantiable not final;
+}}}
+
+Of course, this specification doesn't really accomplish much other than to create a child class of _pluto_obj_.  We won't realize how powerful that is until a little later in this tutorial.
