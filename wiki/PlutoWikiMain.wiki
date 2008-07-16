@@ -13,4 +13,21 @@ Installation couldn't be much easier, just [href="http://code.google.com/p/pluto
   $> sqlplus @install.sql
 }}}
 
+It is recommended that you run the command in a schema called PLUTO and that the PLUTO schema have 'create type' privileges.
+
 If you have any issues with the install, please be sure to [http://code.google.com/p/pluto-test-framework/issues/list log them].  Be sure to mention the version of Oracle that you are running.  And better yet, if you figured out how to fix the issue, please send in the patch.
+
+== What is installed? ==
+
+PLUTO is intended to be a lightweight system for unit testing.  It doesn't create any tables or store a lot of data.  Instead, it creates a TYPE and a handful of objects.
+
+|| pluto_proc_name_tab || A type equivalent to a varchar2(30) ||
+|| pluto_output_obj || An object used for the default output from the testing framework.  This object can be extended to accommodate just about any desired output format. ||
+|| pluto_output_tap_obj || An example of extending the default pluto_output_obj.  This custom output object writes results in TAP, the Test Anything Protocol used by the [http://www.perl.org Perl] testing system, Test::Harness. ||
+|| pluto_util_obj || Utility methods for test assertions. ||
+|| pluto_obj || The core package for the testing framework.  This object is the object that custom test classes extend in order to get the benefit of the PLUTO interpretation of xUnit ||
+
+
+= Getting Started Unit Testing With PLUTO =
+
+coming soon
