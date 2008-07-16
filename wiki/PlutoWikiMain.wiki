@@ -118,3 +118,9 @@ In order to run the test, we simply run an anonymous PL/SQL block.
 }}}
 
 This executes the _test_one_ test and prints the results to the standard Oracle output stream.  Of course, there is a lot more to PLUTO than simply running test methods one after another.  PLUTO implements xUnit-style testing, which we'll go over shortly.  Also, there is a host of functions and procedures available in the PLUTO utility module.
+
+= Order of Execution Within PLUTO =
+
+The basic idea of the PLUTO framework is to extend the _pluto_obj_ object, create procedures that implement tests, and call _run_tests_ to execute those tests.  Of course, there is a little more to it than that.  Not every procedure is a test procedure and not all test procedures are created equally.
+
+PLUTO introspects a given testing object and looks for procedures that are called out as tests.  Procedures are considered tests if they begin with the letters _TEST_.  PLUTO finds all procedures prefixed with _TEST_ and executes them in the order that they sort (ascending) according to the language settings of the current Oracle session.
