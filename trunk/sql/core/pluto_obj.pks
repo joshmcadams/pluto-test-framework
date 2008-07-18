@@ -20,7 +20,7 @@ create or replace type pluto_obj authid current_user as object(
   constructor function pluto_obj
     return self as result,
 --
-  member procedure run_tests,
+  member procedure run_tests(named varchar := null),
 --
   member function source_revision
     return number,
@@ -31,7 +31,7 @@ create or replace type pluto_obj authid current_user as object(
 --
   member procedure determine_calling_obj,
 --
-  member procedure collect_all_procedures,
+  member procedure collect_all_procedures(named varchar),
 --
   member function get_procedures(wildcard varchar)
     return pluto_proc_name_tab,

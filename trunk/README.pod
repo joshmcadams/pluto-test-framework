@@ -41,6 +41,23 @@ archive and run:
 
   sqlplus @install.sql
 
+The user that you install PLUTO as should have a few privledges, specificially
+'create session' and 'create type'.
+
+    SQL> create user pluto identified by pluto;
+    
+    User created.
+    
+    SQL> grant create session to pluto;
+    
+    Grant succeeded.
+    
+    SQL> grant create type to pluto;
+    
+    Grant succeeded.
+
+That should do the trick.
+
 =head1 LICENSE
 
 All source in this distribution has been released under the GPL Version 2 
