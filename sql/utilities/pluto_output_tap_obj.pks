@@ -1,3 +1,10 @@
+set serveroutput on; 
+set feedback on; 
+set echo on; 
+
+whenever oserror exit failure;
+whenever sqlerror exit failure;
+
 create or replace type pluto_output_tap_obj authid current_user under pluto_output_obj(
   constructor function pluto_output_tap_obj
     return self as result,
@@ -18,3 +25,10 @@ create or replace type pluto_output_tap_obj authid current_user under pluto_outp
 )
 instantiable not final;
 /
+
+select case when status = 'INVALID' then 1/0 else 1 end
+    did_the_object_compile
+from user_objects
+where object_name = 'PLUTO_OUTPUT_TAP_OBJ'
+  and object_type = 'TYPE';
+

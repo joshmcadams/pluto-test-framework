@@ -1,3 +1,7 @@
+set serveroutput on; 
+set feedback on; 
+set echo on; 
+
 whenever sqlerror exit failure;
 whenever oserror exit failure;
 
@@ -48,4 +52,10 @@ instantiable not final;
 /
 
 show errors;
+
+select case when status = 'INVALID' then 1/0 else 1 end
+    did_the_object_compile
+from user_objects
+where object_name = 'PLUTO_OBJ'
+  and object_type = 'TYPE';
 

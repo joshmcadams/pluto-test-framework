@@ -1,3 +1,10 @@
+set serveroutput on; 
+set feedback on; 
+set echo on; 
+
+whenever oserror exit failure;
+whenever sqlerror exit failure;
+
 CREATE OR REPLACE type pluto_util_obj authid current_user as object(
   m_output_obj  pluto_output_obj,
 --
@@ -126,3 +133,10 @@ CREATE OR REPLACE type pluto_util_obj authid current_user as object(
 )
 instantiable not final;
 /
+
+select case when status = 'INVALID' then 1/0 else 1 end
+    did_the_object_compile
+from user_objects
+where object_name = 'PLUTO_UTIL_OBJ'
+  and object_type = 'TYPE';
+

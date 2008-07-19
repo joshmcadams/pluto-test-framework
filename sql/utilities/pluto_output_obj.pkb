@@ -1,3 +1,10 @@
+set serveroutput on; 
+set feedback on; 
+set echo on; 
+
+whenever oserror exit failure;
+whenever sqlerror exit failure;
+
 create or replace type body pluto_output_obj is
 --
   constructor function pluto_output_obj
@@ -76,4 +83,10 @@ create or replace type body pluto_output_obj is
 --
 end;
 /
+
+select case when status = 'INVALID' then 1/0 else 1 end
+    did_the_object_compile
+from user_objects
+where object_name = 'PLUTO_OUTPUT_OBJ'
+  and object_type = 'TYPE BODY';
 
