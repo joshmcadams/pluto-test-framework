@@ -245,8 +245,8 @@ CREATE OR REPLACE TYPE BODY pluto_util_obj is
   begin
     return is_ok_helper(
             data_got = data_expected,
-            to_char(data_got),
-            to_char(data_expected),
+            to_char(data_got, 'YYYYMMDDHH24MISS'),
+            to_char(data_expected, 'YYYYMMDDHH24MISS'),
             test_label
           );
   end is_ok;
@@ -271,8 +271,8 @@ CREATE OR REPLACE TYPE BODY pluto_util_obj is
   begin
     return is_ok_helper(
             data_got = data_expected,
-            to_char(data_got),
-            to_char(data_expected),
+            to_char(data_got, 'YYYYMMDDHH24MISSFF9'),
+            to_char(data_expected, 'YYYYMMDDHH24MISSFF9'),
             test_label
           );
   end is_ok;

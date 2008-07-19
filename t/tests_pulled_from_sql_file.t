@@ -33,6 +33,7 @@ $dbh->func( 1000000, 'dbms_output_enable' );
 for my $file (qw( 
     t/pluto_output_obj.sql 
     t/pluto_output_tap_obj.sql 
+    t/pluto_util_obj.sql 
     )) {
     my $sql = read_file $file;
 
