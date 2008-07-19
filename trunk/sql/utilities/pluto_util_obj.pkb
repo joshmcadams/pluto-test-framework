@@ -1,3 +1,10 @@
+set serveroutput on; 
+set feedback on; 
+set echo on; 
+
+whenever oserror exit failure;
+whenever sqlerror exit failure;
+
 CREATE OR REPLACE TYPE BODY pluto_util_obj is
 -------------------------------------------------------------------------------
   constructor function pluto_util_obj(
@@ -330,3 +337,10 @@ CREATE OR REPLACE TYPE BODY pluto_util_obj is
 -------------------------------------------------------------------------------
 end;
 /
+
+select case when status = 'INVALID' then 1/0 else 1 end
+    did_the_object_compile
+from user_objects
+where object_name = 'PLUTO_UTIL_OBJ'
+  and object_type = 'TYPE BODY';
+
