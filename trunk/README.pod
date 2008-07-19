@@ -58,6 +58,16 @@ The user that you install PLUTO as should have a few privledges, specificially
 
 That should do the trick.
 
+If you want to run the test suite, you'll need a few more privledges.
+
+    SQL> grant create table to pluto;
+    
+    Grant succeeded.
+    
+    SQL> alter user pluto quota unlimited on users;
+    
+    User altered.
+
 =head1 LICENSE
 
 All source in this distribution has been released under the GPL Version 2 
