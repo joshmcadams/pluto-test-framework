@@ -35,6 +35,7 @@ for my $file (qw(
     t/pluto_output_tap_obj.sql 
     t/pluto_util_obj.sql 
     t/pluto_obj.sql 
+    t/pluto_obj_named_like.sql 
     )) {
     my $sql = read_file $file;
 
