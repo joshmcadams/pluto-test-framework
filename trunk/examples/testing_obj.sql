@@ -1,6 +1,9 @@
 set serveroutput on;
-set feedback off;
+set feedback on;
 set echo off;
+
+whenever sqlerror exit failure;
+whenever oserror exit failure;
 
 create or replace type testing_obj under pluto_obj(
   member procedure startup_testing,

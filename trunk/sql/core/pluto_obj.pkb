@@ -1,3 +1,6 @@
+whenever sqlerror exit failure;
+whenever oserror exit failure;
+
 create or replace type body pluto_obj is
 --
   constructor function pluto_obj
@@ -7,10 +10,10 @@ create or replace type body pluto_obj is
     return;
   end pluto_obj;
 --
-  member procedure run_tests(named varchar := null) is
+  member procedure run_tests(named_like varchar := null) is
   begin
     self.determine_calling_obj;
-    self.collect_all_procedures(named);
+    self.collect_all_procedures(named_like);
     build_testing_block();
 
     execute immediate m_testing_block;
@@ -72,14 +75,14 @@ create or replace type body pluto_obj is
     return procedures;
   end get_procedures;
 --
-  member procedure collect_all_procedures(named varchar) is
+  member procedure collect_all_procedures(named_like varchar) is
   begin
     m_startup_procedures     := get_procedures('STARTUP%');
     m_shutdown_procedures    := get_procedures('SHUTDOWN%');
     m_setup_procedures       := get_procedures('SETUP%');
     m_teardown_procedures    := get_procedures('TEARDOWN%');
-    if named is not null then
-        m_testing_procedures     := get_procedures('TEST%' || to_upper(named) || '%');
+    if named_like is not null then
+        m_testing_procedures     := get_procedures('TEST%' || upper(named_like) || '%');
     else
         m_testing_procedures     := get_procedures('TEST%');
     end if;
@@ -133,3 +136,6 @@ create or replace type body pluto_obj is
 --
 end;
 /
+
+show errors;
+
