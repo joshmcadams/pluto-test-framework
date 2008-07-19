@@ -134,6 +134,8 @@ CREATE OR REPLACE type pluto_util_obj authid current_user as object(
 instantiable not final;
 /
 
+show errors;
+
 select case when status = 'INVALID' then 1/0 else 1 end
     did_the_object_compile
 from user_objects

@@ -84,6 +84,8 @@ create or replace type body pluto_output_obj is
 end;
 /
 
+show errors;
+
 select case when status = 'INVALID' then 1/0 else 1 end
     did_the_object_compile
 from user_objects
