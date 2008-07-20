@@ -35,20 +35,20 @@ instantiable not final';
   member procedure test_one is
     v_i number;
   begin
-    select i into v_i from x;
+    execute immediate ''select i from x'' into v_i;
     m_util_object.is_ok(
-      got_value      => v_i,
-      expected_value => 1,
+      data_got      => v_i,
+      data_expected => 1,
       test_label     => ''checking value of one''
     );
   end test_one;
   member procedure test_two is
     v_i number;
   begin
-    select count(*) into v_i from x; 
+    execute immediate ''select count(*) from x'' into v_i;
     m_util_object.is_ok(
-      got_value      => v_i,
-      expected_value => 1,
+      data_got      => v_i,
+      data_expected => 1,
       test_label     => ''checking count of one''
     );
   end test_two;
@@ -74,11 +74,6 @@ end;';
 end;
 /* EXPECTED RESULTS
 1..2
-# running startup_testing_again
-# running setup_testing
-ok - running test_one i hope that it worked
-# running teardown_testing
-# running setup_testing
-ok - running test_two
-# running teardown_testing
+ok - checking value of one
+ok - checking count of one
 */
